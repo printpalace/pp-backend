@@ -4,8 +4,14 @@
   "description": "Backend for PrintPalace project",
   "main": "server.js",
   "author": "Print Palace",
-  "license": "ISC",
-  "scripts": {},
+  "scripts": {
+    "start": "npm run build && set NODE_ENV=prod && node ./build/src/server.js",
+    "dev": "set NODE_ENV=dev && node ./node_modules/nodemon/bin/nodemon ./src/server.ts",
+    "build": "node ./node_modules/typescript/bin/tsc",
+    "lint": "node ./node_modules/tslint/bin/tslint -c ./tslint.json \"./src/**/*.ts\" || true",
+    "test": "set NODE_ENV=test && mocha \"./test/**/*.test.ts\" --require ./node_modules/ts-node/register || true",
+    "cover": "node ./node_modules/nyc/bin/nyc npm run test"
+  },
   "devDependencies": {
     "@types/body-parser": "0.0.33",
     "@types/chai": "^3.4.34",
@@ -21,6 +27,7 @@
     "chai-as-promised": "^6.0.0",
     "mocha": "^3.2.0",
     "nodemon": "^1.11.0",
+    "nyc": "^10.0.0",
     "ts-node": "^1.7.0",
     "tslint": "^4.0.2",
     "typescript": "^2.0.10"

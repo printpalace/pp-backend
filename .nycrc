@@ -1,0 +1,23 @@
+{
+  "report-dir": "./coverage",
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "extension": [
+    ".ts"
+  ],
+  "require": [
+    "ts-node/register"
+  ],
+  "reporter": [
+    "text",
+    "html"
+  ],
+  "all": true,
+  "sourceMap": true,
+  "instrument": true,
+  "cache": true
+}
