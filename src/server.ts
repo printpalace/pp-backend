@@ -3,11 +3,15 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as cookieParser from 'cookie-parser';
 import * as cors from 'cors';
-import * as mongoose from 'mongoose';
+import * as dotenv from 'dotenv';
 
+import {setupDB} from './db';
 import setupRoutes from './routes';
 import getLogger from './libs/logger';
+
+dotenv.config();
 const logger = getLogger();
+
 /**
  * Express application
  */
@@ -33,8 +37,11 @@ server.on('listening', () => {
 /**
  * Connecto to MongoDB
  */
+setupDB();
 
-
+/**
+ * Handle uncaught exceptions
+ */
 process.on('uncaughtException', function (err) {
-  logger.error(String(err));
+  logger.error(err);
 });
