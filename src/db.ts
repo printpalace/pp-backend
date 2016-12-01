@@ -1,5 +1,6 @@
 import * as mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
+import * as fs from 'fs';
 import getLogger from './libs/logger';
 
 dotenv.config();
@@ -37,5 +38,16 @@ export const setupDB = () => {
 
   connect();
 
-  // TODO: define models
+  // import models (work synchronously only one time on app start)
+  const appDir = __dirname + '/app';
+  fs.readdirSync(appDir).forEach((dir) => {
+    const dirPath = appDir + '/' + dir;
+    if (fs.lstatSync(dirPath).isDirectory()) {
+      fs.readdirSync(dirPath).forEach((subfile) => {
+        if (/^.+Model\.(t|j)s$/.test(subfile)) {
+          require(dirPath + '/' + subfile);
+        }
+      });
+    }
+  });
 };
