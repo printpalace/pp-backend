@@ -1,5 +1,5 @@
 import 'mocha';
-import {assert} from 'chai';
+import {assert} from './utils/assertions';
 
 function add() {
   return Array.prototype.slice.call(arguments).reduce(function (prev, curr) {
